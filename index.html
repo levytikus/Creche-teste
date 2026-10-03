@@ -354,6 +354,35 @@ section[id], div[id] { scroll-margin-top: 16px; }
 .foot .copy { padding-right: 44px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+/* Logo e nome maiores e proporcionais (topo e rodapé) */
+.header .logo { gap: 16px; }
+.header .logo .sun { width: 96px; height: 104px; }
+.header .logo .kicker { font-size: 1.05rem; letter-spacing: .3em; margin-bottom: 6px; }
+.header .logo .name { font-size: 3.1rem; }
+.header .logo .tag { font-size: 1.1rem; margin-top: 6px; }
+.foot .logo { gap: 14px; }
+.foot .logo .sun { width: 80px; height: 86px; }
+.foot .logo .kicker { font-size: .95rem; }
+.foot .logo .name { font-size: 2.2rem; }
+.foot .logo .tag { font-size: .95rem; }
+@media (max-width: 860px) {
+  .header .logo .sun { width: 84px; height: 91px; }
+  .header .logo .name { font-size: 2.6rem; }
+  .header .logo .kicker { font-size: .95rem; }
+  .header .logo .tag { font-size: 1rem; }
+}
+@media (max-width: 520px) {
+  .header .logo { gap: 12px; }
+  .header .logo .sun { width: 74px; height: 80px; }
+  .header .logo .kicker { font-size: .8rem; margin-bottom: 4px; }
+  .header .logo .name { font-size: 2.15rem; }
+  .header .logo .tag { font-size: .88rem; margin-top: 4px; }
+  .foot .logo .sun { width: 68px; height: 73px; }
+  .foot .logo .name { font-size: 1.9rem; }
+  .foot .logo .kicker { font-size: .8rem; }
+  .foot .logo .tag { font-size: .85rem; }
+}
+@media (max-width: 380px) { .header .logo .tag { font-size: .78rem; } .header .logo .name { font-size: 2rem; } }
 .cloud.f, .finale .cl1, .finale .bf { animation: float 5s ease-in-out infinite; }
 </style>
 </head>
