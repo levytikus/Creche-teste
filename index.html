@@ -354,6 +354,11 @@ section[id], div[id] { scroll-margin-top: 16px; }
 .foot .copy { padding-right: 44px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+/* Nome alinhado à largura do slogan (ajuste fino feito por script abaixo) */
+.logo .tag { white-space: nowrap; }
+.logo .name { display: flex; width: max-content; }
+.logo .kicker { display: block; width: max-content; white-space: nowrap; }
+
 /* Logo e nome maiores e proporcionais (topo e rodapé) */
 .header .logo { gap: 16px; }
 .header .logo .sun { width: 96px; height: 104px; }
@@ -361,10 +366,10 @@ section[id], div[id] { scroll-margin-top: 16px; }
 .header .logo .name { font-size: 3.1rem; }
 .header .logo .tag { font-size: 1.1rem; margin-top: 6px; }
 .foot .logo { gap: 14px; }
-.foot .logo .sun { width: 80px; height: 86px; }
+.foot .logo .sun { width: 62px; height: 67px; }
 .foot .logo .kicker { font-size: .95rem; }
 .foot .logo .name { font-size: 2.2rem; }
-.foot .logo .tag { font-size: .95rem; }
+.foot .logo .tag { font-size: .76rem; }
 @media (max-width: 860px) {
   .header .logo .sun { width: 84px; height: 91px; }
   .header .logo .name { font-size: 2.6rem; }
@@ -377,10 +382,10 @@ section[id], div[id] { scroll-margin-top: 16px; }
   .header .logo .kicker { font-size: .8rem; margin-bottom: 4px; }
   .header .logo .name { font-size: 2.15rem; }
   .header .logo .tag { font-size: .88rem; margin-top: 4px; }
-  .foot .logo .sun { width: 68px; height: 73px; }
+  .foot .logo .sun { width: 58px; height: 63px; }
   .foot .logo .name { font-size: 1.9rem; }
   .foot .logo .kicker { font-size: .8rem; }
-  .foot .logo .tag { font-size: .85rem; }
+  .foot .logo .tag { font-size: .74rem; }
 }
 @media (max-width: 380px) { .header .logo .tag { font-size: .78rem; } .header .logo .name { font-size: 2rem; } }
 .cloud.f, .finale .cl1, .finale .bf { animation: float 5s ease-in-out infinite; }
@@ -846,5 +851,32 @@ section[id], div[id] { scroll-margin-top: 16px; }
 })();
 </script>
 
+<script>
+/* Faz "CRECHE ESCOLA" e "REI LEÃO" ocuparem exatamente a largura do slogan */
+(function () {
+  function fit() {
+    document.querySelectorAll('.logo').forEach(function (logo) {
+      var tag = logo.querySelector('.tag'), name = logo.querySelector('.name'), kick = logo.querySelector('.kicker');
+      if (!tag || !name || !kick) return;
+      var r = document.createRange(); r.selectNodeContents(tag);
+      var w = r.getBoundingClientRect().width;
+      if (!w) return;
+      name.style.fontSize = ''; kick.style.fontSize = ''; kick.style.letterSpacing = '0px';
+      var fs = parseFloat(getComputedStyle(name).fontSize), w0 = name.getBoundingClientRect().width;
+      if (!w0) return;
+      var nfs = fs * w / w0; name.style.fontSize = nfs + 'px';
+      var kfs = Math.max(10, nfs * 0.36); kick.style.fontSize = kfs + 'px';
+      var kw = kick.getBoundingClientRect().width, n = kick.textContent.length;
+      kick.style.letterSpacing = Math.max(0, (w - kw) / (n - 1)) + 'px';
+    });
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(fit, 80); }
+  window.addEventListener('resize', later);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
+</script>
 </body>
 </html>
