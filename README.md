@@ -1,4 +1,4 @@
-# Creche Escola Arco-Íris
+# Creche Escola Rei Leão
 
 Site de uma página, feito com HTML, CSS e JavaScript puros. Não precisa instalar nada.
 
